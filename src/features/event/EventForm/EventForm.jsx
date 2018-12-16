@@ -1,18 +1,40 @@
 import React, { Component } from 'react';
 import { Segment, Form, Button } from 'semantic-ui-react';
 
+const emptyEvent= {
+  title:'',
+  date: '',
+  city: '',
+  venue: '',
+  hostedBy:''
+}
+
+
+
 class EventForm extends Component {
   //controlled form function for input
   state ={
-    event: {
-      title:'',
-      date: '',
-      city: '',
-      venue: '',
-      hostedBy:''
-    }
+    event: emptyEvent
   }
   
+  //for selected event to read
+  componentDidMount() {
+    if(this.props.selectedEvent !==null){
+      this.setState({
+        event: this.props.selectedEvent
+      })
+    }
+  }
+//for read current selected event on form
+componentWillReceiveProps(nextProps) {
+  //console.log('current: ', this.props.selectedEvent);
+  //console.log('next: ', nextProps.selectedEvent);
+  if(nextProps.selectedEvent !==this.props.selectedEvent){
+    this.setState({
+      event: nextProps.selectedEvent || emptyEvent
+    })
+  }
+}
 
   onInputChange = (evt) => {
     const newEvent = this.state.event;
@@ -25,8 +47,11 @@ class EventForm extends Component {
   onFormSubmit = (evt)=> {
     evt.preventDefault();
     //console.log(this.state.event);  // for controlled form, "this.refs.title.value" change to  "this.state.event"
-    this.props.createEvent(this.state.event) //for controlled form createEvent
-
+    if(this.state.event.id){       //check event id
+      this.props.updateEvent(this.state.event);    // update an exist event
+    }else{
+      this.props.createEvent(this.state.event)      //for controlled form createEvent
+    }
   }
   render() {
     const {handleCancel} = this.props; 
