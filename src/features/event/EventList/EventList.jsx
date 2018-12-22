@@ -4,15 +4,13 @@ import EventListItem from './EventListItem';
 //add "onEventOpen" for read operation, deleteEvent for delete operation
 class EventList extends Component {
   render() {
-    const {events, onEventOpen, deleteEvent} = this.props;
+    const {events,deleteEvent} = this.props;
     return (
       <div>
-        <h1>EventList</h1>
         {events.map((event) => (
             <EventListItem 
               key={event.id} 
               event={event}  
-              onEventOpen={onEventOpen} 
               deleteEvent={deleteEvent} 
             />
         ))}
