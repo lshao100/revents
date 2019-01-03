@@ -8,7 +8,7 @@ import App from './app/layout/App';
 import registerServiceWorker from './registerServiceWorker';
 import { configureStore } from './app/store/configureStore';
 import ScrollToTop from './app/common/util/ScrollToTop';
-
+//AIzaSyAMVFeezwdVZOf3liJV6VIAGD3g-Umw-k0
 const store =configureStore();
 
 const rootEl=document.getElementById('root');
